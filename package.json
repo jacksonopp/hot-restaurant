@@ -1,0 +1,19 @@
+{
+   "name": "assets",
+   "version": "1.0.0",
+   "description": "",
+   "main": "server.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server.js",
+      "watch": "nodemon server.js"
+   },
+   "author": "",
+   "license": "MIT",
+   "dependencies": {
+      "axios": "^0.19.0",
+      "express": "^4.17.1",
+      "nodemon": "^1.19.2",
+      "uniqid": "^5.0.3"
+   }
+}
