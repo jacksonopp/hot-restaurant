@@ -1,11 +1,11 @@
 const reservations = [
     {
-        name: "ok",
+        name: "bob",
         phone: "444 - 444 - 4444",
-        routeName: "ok",
-        date: "4/20/69",
-        id: "sfklshd",
-
+        numOfPeople: 3,
+        dateAndTime: "1993-08-02T06:02",
+        routeName: "bob",
+        unique_id: "a totally unique id"
     }
 ]
 

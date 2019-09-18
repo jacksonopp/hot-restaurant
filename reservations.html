@@ -49,7 +49,51 @@
             </div>
          </div>
          <div class="row">
-            <div class="col-12" id="tables"></div>
+            <div class="col-12">
+               <form>
+                  <div class="form-group">
+                     <label for="name">Name</label>
+                     <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        aria-describedby="emailHelp"
+                        placeholder="Enter name"
+                     />
+                  </div>
+                  <div class="form-group">
+                     <label for="num-of-people"># of People</label>
+                     <input
+                        type="number"
+                        class="form-control"
+                        id="num-of-people"
+                        placeholder="0"
+                     />
+                  </div>
+
+                  <div class="form-group">
+                     <label for="phone">Phone Number</label>
+                     <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        placeholder="555-555-1234"
+                     />
+                  </div>
+                  <div class="form-group">
+                     <label for="date-and-time">Date and Time</label>
+                     <input
+                        type="datetime-local"
+                        class="form-control"
+                        id="date-and-time"
+                        placeholder=""
+                     />
+                  </div>
+               </form>
+               <button type="submit" class="btn btn-primary" id="submit-btn">
+                  Submit
+               </button>
+            </div>
          </div>
          <div class="row">
             <div class="col-12">
@@ -65,58 +109,28 @@
          integrity="sha256-XmdRbTre/3RulhYk/cOBUMpYlaAp2Rpo/s556u0OIKk="
          crossorigin="anonymous"
       ></script>
-      <script
-         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"
-         integrity="sha256-H9jAz//QLkDOy/nzE9G4aYijQtkLt9FvGmdUTwBk6gs="
-         crossorigin="anonymous"
-      ></script>
       <!-- custom -->
       <script type="text/javascript">
-         //array to store titles
-         const tableHeadTitles = ["Name", "Date", "ReservationID"];
-         //DOM element
-         const tableDiv = document.getElementById("tables"); // DOM element
-         //Creating <table>
-         const tableTable = document.createElement("table");
-         tableTable.classList.add("table");
-         tableDiv.append(tableTable);
-         //creating <thead>
-         const tableThead = document.createElement("thead");
-         tableTable.append(tableThead);
-         //creating <tr> for the headers
-         const tableRowHead = document.createElement("tr");
-         tableThead.append(tableRowHead);
+         const submitBtn = document.getElementById("submit-btn");
 
-         //creating the content for the tables
-         tableHeadTitles.forEach(item => {
-            const tableHead = document.createElement("th");
-            tableHead.setAttribute("scope", "col");
-            tableHead.innerText = item;
-            tableThead.append(tableHead);
-         });
-
-         const tableBody = document.createElement("tbody");
-         tableTable.append(tableBody);
-
-         axios.get("/api/reservations").then(response => {
-            const data = response.data;
-            console.log(data);
-            data.forEach(item => {
-               const tableRow = document.createElement("tr");
-               tableBody.append(tableRow);
-               const tableDname = document.createElement("td");
-               tableDname.innerText = item.name;
-
-               const tableDdate = document.createElement("td");
-               tableDdate.innerText = moment(item.dateAndTime).format("LLL");
-
-               const tableDid = document.createElement("td");
-               tableDid.innerText = item.unique_id;
-
-               tableRow.append(tableDname);
-               tableRow.append(tableDdate);
-               tableRow.append(tableDid);
-            });
+         submitBtn.addEventListener("click", () => {
+            // const newReservation = {};
+            // do axios request
+            // console.log(newReservation);
+            axios
+               .post("/api/reservations", {
+                  name: document.getElementById("name").value.trim(),
+                  phone: document.getElementById("phone").value.trim(),
+                  numOfPeople: document
+                     .getElementById("num-of-people")
+                     .value.trim(),
+                  dateAndTime: document
+                     .getElementById("date-and-time")
+                     .value.trim()
+               })
+               .then(response => {
+                  console.log(response);
+               });
          });
       </script>
       <!-- <script src="./assets/js/tables.js"></script> -->
