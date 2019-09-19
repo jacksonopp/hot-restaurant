@@ -2,16 +2,20 @@
 const express = require("express");
 const path = require("path");
 const id = require("uniqid");
+const mysql = require("mysql");
+const sqlConfig = require("./public/config/mySqlConfig");
 
 const reservations = require("./assets/api/reservations");
 const waitlist = require("./assets/api/waitlist");
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const connection = mysql.createConnection(sqlConfig);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/public", express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, "public")))
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"))
