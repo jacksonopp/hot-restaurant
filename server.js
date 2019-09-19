@@ -75,7 +75,6 @@ app.post("/api/reservations", (req, res) => {
 
         waitlist.push(newReservation);
     }
-
     res.json(newReservation);
 
 })
